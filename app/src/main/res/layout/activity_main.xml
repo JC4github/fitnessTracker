@@ -46,6 +46,7 @@
 
     </ImageView>
 
+
     <ImageButton
         android:id="@+id/absBtn"
         android:layout_width="wrap_content"
@@ -54,30 +55,40 @@
         android:layout_alignTop="@+id/frontBackground"
         android:layout_alignEnd="@+id/frontBackground"
         android:layout_alignBottom="@+id/frontBackground"
-        android:layout_marginStart="161.5dp"
-        android:layout_marginTop="145.5dp"
-        android:layout_marginEnd="163.5dp"
-        android:layout_marginBottom="329.5dp"
+        android:layout_marginStart="161dp"
+        android:layout_marginTop="145dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="330dp"
         android:adjustViewBounds="true"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/abs" />
-
+        app:srcCompat="@drawable/abs_red" />
 
     <ImageButton
-        android:id="@+id/bicepLBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:id="@+id/bicepBtn"
+        android:layout_width="185dp"
+        android:layout_height="137dp"
         android:layout_alignStart="@+id/frontBackground"
         android:layout_alignTop="@+id/frontBackground"
         android:layout_alignEnd="@+id/frontBackground"
         android:layout_alignBottom="@+id/frontBackground"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="134dp"
-        android:layout_marginEnd="239dp"
-        android:layout_marginBottom="354dp"
+        android:layout_marginStart="111dp"
+        android:layout_marginTop="97dp"
+        android:layout_marginEnd="108dp"
+        android:layout_marginBottom="317dp"
         android:adjustViewBounds="true"
         android:background="@null"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/bicep_l" />
+        app:srcCompat="@drawable/bicep_red" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="36dp"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/frontBackground"
+        android:layout_alignBottom="@+id/frontBackground"
+        android:layout_marginEnd="248dp"
+        android:layout_marginBottom="362dp"
+        android:background="@color/transparent"
+        android:rotation="103" />
 </RelativeLayout>
