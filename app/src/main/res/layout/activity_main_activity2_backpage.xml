@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp">
+
+            <Button
+                android:id="@+id/frontBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="5"
+                android:text="Front"></Button>
+
+            <Button
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="Back"></Button>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/frontBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="548dp"
+        android:layout_marginTop="100dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/back"
+        android:layout_centerHorizontal="true">
+
+    </ImageView>
+
+    <ImageButton
+        android:id="@+id/glutesBtn"
+        android:layout_width="110dp"
+        android:layout_height="80dp"
+        android:layout_alignStart="@+id/frontBackground"
+        android:layout_alignTop="@+id/frontBackground"
+        android:layout_alignEnd="@+id/frontBackground"
+        android:layout_alignBottom="@+id/frontBackground"
+        android:layout_marginStart="144dp"
+        android:layout_marginTop="225dp"
+        android:layout_marginEnd="146dp"
+        android:layout_marginBottom="244dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/glutes" />
+
+</RelativeLayout>

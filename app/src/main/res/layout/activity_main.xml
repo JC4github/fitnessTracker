@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp">
+
+            <Button
+                android:id="@+id/frontBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:layout_weight="5"
+                android:text="Front"></Button>
+
+            <Button
+                android:id="@+id/backBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="5"
+                android:text="Back"></Button>
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <ImageView
+        android:id="@+id/frontBackground"
+        android:layout_width="wrap_content"
+        android:layout_height="548dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        android:src="@drawable/front">
+
+    </ImageView>
+
+    <ImageButton
+        android:id="@+id/absBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="73dp"
+        android:layout_alignStart="@+id/frontBackground"
+        android:layout_alignTop="@+id/frontBackground"
+        android:layout_alignEnd="@+id/frontBackground"
+        android:layout_alignBottom="@+id/frontBackground"
+        android:layout_marginStart="161.5dp"
+        android:layout_marginTop="145.5dp"
+        android:layout_marginEnd="163.5dp"
+        android:layout_marginBottom="329.5dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/abs" />
+
+
+    <ImageButton
+        android:id="@+id/bicepLBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_alignStart="@+id/frontBackground"
+        android:layout_alignTop="@+id/frontBackground"
+        android:layout_alignEnd="@+id/frontBackground"
+        android:layout_alignBottom="@+id/frontBackground"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="134dp"
+        android:layout_marginEnd="239dp"
+        android:layout_marginBottom="354dp"
+        android:adjustViewBounds="true"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/bicep_l" />
+</RelativeLayout>
