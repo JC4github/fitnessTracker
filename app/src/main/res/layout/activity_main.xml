@@ -328,11 +328,37 @@
         android:layout_marginBottom="453dp"
         android:background="@color/transparent" />
 
+
+
     <androidx.recyclerview.widget.RecyclerView
+        android:paddingTop="10dp"
         android:layout_width="match_parent"
-        android:layout_height="190dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spacer"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:id="@+id/workoutRecView"
+        android:background="@color/offWhite"/>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/frontBackground"
-        android:layout_margin="20dp"
-        android:id="@+id/workoutRecView"/>
+        android:id="@+id/spacer"
+        app:cardBackgroundColor="@color/offWhite"
+        app:cardCornerRadius="10dp"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="History"
+            android:textSize="20dp"
+            android:layout_marginLeft="43dp"/>
+
+    </androidx.cardview.widget.CardView>
+
+
 
 </RelativeLayout>
