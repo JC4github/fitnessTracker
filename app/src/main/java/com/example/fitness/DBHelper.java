@@ -15,7 +15,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase DB) {
-        DB.execSQL("create Table Workout(muscle TEXT primary key, weekday TEXT, date TEXT)");
+        DB.execSQL("create Table if not exists Workout(muscle TEXT primary key, weekday TEXT, date TEXT)");
     }
 
     @Override

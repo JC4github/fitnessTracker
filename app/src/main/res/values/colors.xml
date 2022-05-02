@@ -9,5 +9,9 @@
     <color name="white">#FFFFFFFF</color>
     <color name="transparent">#00000000</color>
     <color name="offWhite">#edeff2</color>
+    <color name="mainorange">#ff4f2c</color>
+    <color name="lightorange">#fc6345</color>
+    <color name="darkorange">#f04725</color>
+
 
 </resources>

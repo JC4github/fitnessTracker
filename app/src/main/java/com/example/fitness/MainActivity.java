@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -25,9 +26,13 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private Button back;
+    private Button front;
     private DBHelper DB;
     private RecyclerView workoutRecView;
     ArrayList<workoutmodel> list;
+
+    private RelativeLayout groupA;
+    private RelativeLayout groupB;
 
     //all images
     private ImageView bicep;
@@ -38,6 +43,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ImageView quad;
     private ImageView calf;
     private ImageView forearm;
+    private ImageView tricep;
+    private ImageView forearm2;
+    private ImageView glutes;
+    private ImageView shoulder2;
+    private ImageView hamstring;
+    private ImageView calf2;
+    private ImageView lowerback;
+    private ImageView lats;
+    private ImageView traps2;
+    private ImageView traps3;
 
     //all buttons
     private Button bicepBtnL;
@@ -53,6 +68,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button quadBtnR;
     private Button calfBtnL;
     private Button calfBtnR;
+    private Button tricepLBtn;
+    private Button tricepRBtn;
+    private Button forearmLBtn;
+    private Button forearmRBtn;
+    private Button shoulderLBtn;
+    private Button shoulderRBtn;
+    private Button traps2Btn;
+    private Button traps3Btn;
+    private Button glutesBtn;
+    private Button hamstringBtn;
+    private Button calf2LBtn;
+    private Button calf2RBtn;
+    private Button lowerBackBtn;
+    private Button latsLBtn;
+    private Button latsRBtn;
 
     private boolean biceplock = false;
     private boolean abslock = false;
@@ -62,6 +92,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean shoulderlock = false;
     private boolean quadlock = false;
     private boolean calflock = false;
+    private boolean triceplock = false;
+    private boolean latslock = false;
+    private boolean hamstringlock = false;
+    private boolean gluteslock = false;
+    private boolean traps2lock = false;
+    private boolean traps3lock = false;
+    private boolean forearm2lock = false;
+    private boolean lowerbacklock = false;
+    private boolean shoulder2lock = false;
+    private boolean calf2lock = false;
 
     Date date = new Date();
     SimpleDateFormat weekday = new SimpleDateFormat("EEEE");
@@ -75,63 +115,104 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.bicepBtnL:
             case R.id.bicepBtnR:
                 if(biceplock == false){
-                    changeVisible(bicep, "Bicep");
+                    changeVisible(bicep, "Biceps");
                     break;
                 }
-                Toast.makeText(this, "Hold to delete", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.forearmBtnL:
             case R.id.forearmBtnR:
+            case R.id.forearm2LBtn:
+            case R.id.forearm2RBtn:
                 if(forearmlock == false){
-                    changeVisible(forearm, "Forearm");
+                    changeVisible(forearm, "Forearms");
+                    changeVisible(forearm2, "Forearms");
                     break;
                 }
-                Toast.makeText(this, "Hold to delete", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.shoulderBtnL:
             case R.id.shoulderBtnR:
+            case R.id.shoulder2LBtn:
+            case R.id.shoulder2RBtn:
                 if(shoulderlock == false){
-                    changeVisible(shoulder, "Shoulder");
+                    changeVisible(shoulder2, "Shoulders");
+                    changeVisible(shoulder, "Shoulders");
                     break;
                 }
-                Toast.makeText(this, "Hold to delete", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.quadBtnL:
             case R.id.quadBtnR:
                 if(quadlock == false){
-                    changeVisible(quad, "Quad");
+                    changeVisible(quad, "Quads");
                     break;
                 }
-                Toast.makeText(this, "Hold to delete", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.calf1BtnL:
             case R.id.calf1BtnR:
+            case R.id.calf2BtnL:
+            case R.id.calf2BtnR:
                 if(calflock == false){
-                    changeVisible(calf, "Calf");
+                    changeVisible(calf, "Calfs");
+                    changeVisible(calf2, "Calfs");
                     break;
                 }
-                Toast.makeText(this, "Hold to delete", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.trapsBtn:
+            case R.id.traps2Btn:
                 if(trapslock == false){
+                    changeVisible(traps2, "Upper Traps");
                     changeVisible(traps, "Upper Traps");
                     break;
                 }
-                Toast.makeText(this, "Hold to delete", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.chestBtn:
                 if(chestlock == false){
                     changeVisible(chest, "Chest");
                     break;
                 }
-                Toast.makeText(this, "Hold to delete", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.absBtn:
                 if(abslock == false){
                     changeVisible(abs, "Abs");
                     break;
                 }
-                Toast.makeText(this, "Hold to delete", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tricepLBtn:
+            case R.id.tricepRBtn:
+                if (triceplock == false) {
+                    changeVisible(tricep, "Triceps");
+                    break;
+                }
+                break;
+            case R.id.latsLBtn:
+            case R.id.latsRBtn:
+                if (latslock == false) {
+                    changeVisible(lats, "Lats");
+                    break;
+                }
+                break;
+            case R.id.glutesBtn:
+                if (gluteslock == false) {
+                    changeVisible(glutes, "Glutes");
+                    break;
+                }
+                break;
+            case R.id.lowerBackBtn:
+                if (lowerbacklock == false) {
+                    changeVisible(lowerback, "Lower Back");
+                    break;
+                }
+                break;
+            case R.id.traps3Btn:
+                if (traps3lock == false) {
+                    changeVisible(traps3, "Mid Traps");
+                    break;
+                }
+                break;
+            case R.id.hamstringBtn:
+                if (hamstringlock == false) {
+                    changeVisible(hamstring, "Hamstrings");
+                    break;
+                }
                 break;
         }
     }
@@ -143,12 +224,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        groupA = findViewById(R.id.groupA);
+        groupB = findViewById(R.id.groupB);
+
         DB = new DBHelper(this);
+
         back = findViewById(R.id.backBtn);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openBackActivity();
+                groupA.setVisibility(groupA.INVISIBLE);
+                groupB.setVisibility(groupB.VISIBLE);
+            }
+        });
+
+        front = findViewById(R.id.frontBtn);
+        front.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                groupB.setVisibility(groupB.INVISIBLE);
+                groupA.setVisibility(groupA.VISIBLE);
             }
         });
 
@@ -173,6 +268,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         quad = findViewById(R.id.quad);
         calf = findViewById(R.id.calf1);
         traps = findViewById(R.id.traps1);
+        tricep = findViewById(R.id.tricep);
+        forearm2 = findViewById(R.id.forearm2);
+        shoulder2 = findViewById(R.id.shoulder2);
+        traps2 = findViewById(R.id.traps2);
+        traps3 = findViewById(R.id.traps3);
+        lats = findViewById(R.id.lats);
+        glutes = findViewById(R.id.glutes);
+        calf2 = findViewById(R.id.calf2);
+        lowerback = findViewById(R.id.lowerBack);
+        hamstring = findViewById(R.id.hamstring);
 
         //initialise all buttons
         bicepBtnL = findViewById(R.id.bicepBtnL);
@@ -209,35 +314,56 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         trapsBtn = findViewById(R.id.trapsBtn);
         trapsBtn.setOnClickListener(this);
 
+        tricepLBtn = findViewById(R.id.tricepLBtn);
+        tricepLBtn.setOnClickListener(this);
+        tricepRBtn = findViewById(R.id.tricepRBtn);
+        tricepRBtn.setOnClickListener(this);
+
+        forearmLBtn = findViewById(R.id.forearm2LBtn);
+        forearmLBtn.setOnClickListener(this);
+        forearmRBtn = findViewById(R.id.forearm2RBtn);
+        forearmRBtn.setOnClickListener(this);
+
+        shoulderLBtn = findViewById(R.id.shoulder2LBtn);
+        shoulderLBtn.setOnClickListener(this);
+        shoulderRBtn = findViewById(R.id.shoulder2RBtn);
+        shoulderRBtn.setOnClickListener(this);
+
+        traps2Btn =  findViewById(R.id.traps2Btn);
+        traps2Btn.setOnClickListener(this);
+        traps3Btn = findViewById(R.id.traps3Btn);
+        traps3Btn.setOnClickListener(this);
+
+        glutesBtn = findViewById(R.id.glutesBtn);
+        glutesBtn.setOnClickListener(this);
+        hamstringBtn = findViewById(R.id.hamstringBtn);
+        hamstringBtn.setOnClickListener(this);
+        calf2LBtn = findViewById(R.id.calf2BtnL);
+        calf2LBtn.setOnClickListener(this);
+        calf2RBtn = findViewById(R.id.calf2BtnR);
+        calf2RBtn.setOnClickListener(this);
+        lowerBackBtn = findViewById(R.id.lowerBackBtn);
+        lowerBackBtn.setOnClickListener(this);
+        latsLBtn = findViewById(R.id.latsLBtn);
+        latsLBtn.setOnClickListener(this);
+        latsRBtn = findViewById(R.id.latsRBtn);
+        latsRBtn.setOnClickListener(this);
+
         render();
     }
 
-
-    public void openBackActivity(){
-        Intent intent = new Intent(this, MainActivity2_backpage.class);
-        startActivity(intent);
-    }
-
-    private void changeVisible(View view, String name) {
+    public void changeVisible(View view, String name) {
 
         if (view.getVisibility() == View.VISIBLE) {
             view.setVisibility(View.INVISIBLE);
-            Boolean checkdeletedata = DB.deletedata(name, month.format(date));
-            if (checkdeletedata == false){
-                Toast.makeText(this, "Failed to delete", Toast.LENGTH_SHORT).show();
-            }else{
-                Toast.makeText(this, "Deleted", Toast.LENGTH_SHORT).show();
-            }
+            DB.deletedata(name, month.format(date));
             updatecard(null);
             return;
         }
 
         view.setVisibility(View.VISIBLE);
         Boolean checkinsertdata = DB.insertdata(name, weekday.format(date), month.format(date));
-        if (checkinsertdata == false){
-            Toast.makeText(this, "Failed to insert", Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(this, "Inserted", Toast.LENGTH_SHORT).show();
+        if (checkinsertdata == true){
             updatecard(name);
         }
     }
@@ -251,7 +377,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         list.clear();
         Cursor result = DB.getdata();
         while (result.moveToNext()){
-            list.add(new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
+            list.add(0, new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
         }
         adapter.notifyDataSetChanged();
     }
@@ -260,7 +386,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         list.clear();
         Cursor result = DB.getdata();
         while (result.moveToNext()){
-            list.add(new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
+            list.add(0, new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
         }
     }
 
@@ -275,29 +401,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         while (result.moveToNext()){
             switch (result.getString(0)){
-                case "Bicep":
-                    changeVisible(bicep, "Bicep");
+                case "Biceps":
+                    changeVisible(bicep, "Biceps");
                     biceplock = true; //locks button if its already in data base
                     break;
-                case "Forearm":
-                    changeVisible(forearm, "Forearm");
+                case "Forearms":
+                    changeVisible(forearm, "Forearms");
                     forearmlock = true;
+                    changeVisible(forearm2, "Forearms");
+                    forearm2lock = true;
                     break;
-                case "Shoulder":
-                    changeVisible(shoulder, "Shoulder");
+                case "Shoulders":
+                    changeVisible(shoulder, "Shoulders");
                     shoulderlock = true;
+                    changeVisible(shoulder2, "Shoulders");
+                    shoulder2lock = true;
                     break;
-                case "Quad":
-                    changeVisible(quad, "Quad");
+                case "Quads":
+                    changeVisible(quad, "Quads");
                     quadlock = true;
                     break;
-                case "Calf":
-                    changeVisible(calf, "Calf");
+                case "Calfs":
+                    changeVisible(calf, "Calfs");
                     calflock = true;
+                    changeVisible(calf2, "Calfs");
+                    calf2lock = true;
                     break;
                 case "Upper Traps":
                     changeVisible(traps, "Upper Traps");
                     trapslock = true;
+                    changeVisible(traps2, "Upper Traps");
+                    traps2lock = true;
                     break;
                 case "Chest":
                     changeVisible(chest, "Chest");
@@ -306,6 +440,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 case "Abs":
                     changeVisible(abs, "Abs");
                     abslock = true;
+                    break;
+                case "Triceps":
+                    changeVisible(tricep, "Triceps");
+                    triceplock = true; //locks button if its already in data base
+                    break;
+                case "Hamstrings":
+                    changeVisible(hamstring, "Hamstrings");
+                    hamstringlock = true;
+                    break;
+                case "Glutes":
+                    changeVisible(glutes, "Glutes");
+                    gluteslock = true;
+                    break;
+                case "Mid Traps":
+                    changeVisible(traps3, "Mid Traps");
+                    traps3lock = true;
+                    break;
+                case "Lower Back":
+                    changeVisible(lowerback, "Lower Back");
+                    lowerbacklock = true;
+                    break;
+                case "Lats":
+                    changeVisible(lats, "Lats");
+                    latslock = true;
                     break;
             }
         }
