@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
 
 public class DBHelper extends SQLiteOpenHelper {
     public DBHelper(Context context) {
@@ -15,7 +14,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase DB) {
-        DB.execSQL("create Table if not exists Workout(muscle TEXT primary key, weekday TEXT, date TEXT)");
+        DB.execSQL("create Table if not exists Workout (id integer primary key autoincrement, muscle TEXT, weekday TEXT, date TEXT)");
     }
 
     @Override
@@ -30,37 +29,27 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("weekday", weekday);
         contentValues.put("date", date);
         long result = DB.insert("Workout", null, contentValues);
-        if(result == -1){
-            return false;
-        }else{
-            return true;
-        }
+        return result != -1;
     }
 
-    public Boolean deletedata(String muscle, String date){
+    public void deletedata(String muscle, String date){
         SQLiteDatabase DB = this.getWritableDatabase();
         Cursor cursor = DB.rawQuery("Select * from Workout where muscle = ? and date = ?", new String[]{muscle, date});
-        if (cursor.getCount() > 0){
-            long result = DB.delete("Workout", "muscle=? and date=?", new String[]{muscle, date});
-            if(result == -1){
-                return false;
-            }else{
-                return true;
-            }
-        }else{
-            return false;
+        if (cursor.getCount() > 0) {
+            DB.delete("Workout", "muscle=? and date=?", new String[]{muscle, date});
         }
+        cursor.close();
     }
 
     public Cursor getdata(){
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Workout", null);
-        return cursor;
+//        Cursor cursor = DB.rawQuery("Select * from Workout", null);
+        return DB.rawQuery("Select muscle, weekday, date from Workout", null);
     }
 
-    public Cursor getNameFromDate(String day, String daybefore, String daydaybefore){
+    public Cursor getNameFromDate(String today, String yesterday, String beforeYesterday){
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select muscle from Workout where date = ? or date = ? or date= ?", new String[]{day, daybefore, daydaybefore});
-        return cursor;
+//        Cursor cursor = DB.rawQuery("Select muscle from Workout where date = ? or date = ? or date= ?", new String[]{today, yesterday, beforeYesterday});
+        return DB.rawQuery("Select muscle from Workout where date = ? or date = ? or date= ?", new String[]{today, yesterday, beforeYesterday});
     }
 }

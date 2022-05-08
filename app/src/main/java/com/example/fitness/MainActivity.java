@@ -1,27 +1,20 @@
 package com.example.fitness;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.database.Cursor;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -96,26 +89,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean latslock = false;
     private boolean hamstringlock = false;
     private boolean gluteslock = false;
-    private boolean traps2lock = false;
     private boolean traps3lock = false;
-    private boolean forearm2lock = false;
     private boolean lowerbacklock = false;
-    private boolean shoulder2lock = false;
-    private boolean calf2lock = false;
 
-    Date date = new Date();
-    SimpleDateFormat weekday = new SimpleDateFormat("EEEE");
-    SimpleDateFormat month = new SimpleDateFormat("MMM dd");
+    LocalDate today;
+    String todayString;
+    String weekdayString;
 
     workoutRecViewAdapter adapter;
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.bicepBtnL:
             case R.id.bicepBtnR:
-                if(biceplock == false){
-                    changeVisible(bicep, "Biceps");
+                if (biceplock == false) {
+                    changeVisibleAndInsert(bicep, "Biceps");
                     break;
                 }
                 break;
@@ -123,8 +112,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.forearmBtnR:
             case R.id.forearm2LBtn:
             case R.id.forearm2RBtn:
-                if(forearmlock == false){
-                    changeVisible(forearm, "Forearms");
+                if (forearmlock == false) {
+                    changeVisibleAndInsert(forearm, "Forearms");
                     changeVisible(forearm2, "Forearms");
                     break;
                 }
@@ -133,16 +122,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.shoulderBtnR:
             case R.id.shoulder2LBtn:
             case R.id.shoulder2RBtn:
-                if(shoulderlock == false){
-                    changeVisible(shoulder2, "Shoulders");
+                if (shoulderlock == false) {
+                    changeVisibleAndInsert(shoulder2, "Shoulders");
                     changeVisible(shoulder, "Shoulders");
                     break;
                 }
                 break;
             case R.id.quadBtnL:
             case R.id.quadBtnR:
-                if(quadlock == false){
-                    changeVisible(quad, "Quads");
+                if (quadlock == false) {
+                    changeVisibleAndInsert(quad, "Quads");
                     break;
                 }
                 break;
@@ -150,67 +139,67 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.calf1BtnR:
             case R.id.calf2BtnL:
             case R.id.calf2BtnR:
-                if(calflock == false){
-                    changeVisible(calf, "Calfs");
+                if (calflock == false) {
+                    changeVisibleAndInsert(calf, "Calfs");
                     changeVisible(calf2, "Calfs");
                     break;
                 }
                 break;
             case R.id.trapsBtn:
             case R.id.traps2Btn:
-                if(trapslock == false){
-                    changeVisible(traps2, "Upper Traps");
+                if (trapslock == false) {
+                    changeVisibleAndInsert(traps2, "Upper Traps");
                     changeVisible(traps, "Upper Traps");
                     break;
                 }
                 break;
             case R.id.chestBtn:
-                if(chestlock == false){
-                    changeVisible(chest, "Chest");
+                if (chestlock == false) {
+                    changeVisibleAndInsert(chest, "Chest");
                     break;
                 }
                 break;
             case R.id.absBtn:
-                if(abslock == false){
-                    changeVisible(abs, "Abs");
+                if (abslock == false) {
+                    changeVisibleAndInsert(abs, "Abs");
                     break;
                 }
                 break;
             case R.id.tricepLBtn:
             case R.id.tricepRBtn:
                 if (triceplock == false) {
-                    changeVisible(tricep, "Triceps");
+                    changeVisibleAndInsert(tricep, "Triceps");
                     break;
                 }
                 break;
             case R.id.latsLBtn:
             case R.id.latsRBtn:
                 if (latslock == false) {
-                    changeVisible(lats, "Lats");
+                    changeVisibleAndInsert(lats, "Lats");
                     break;
                 }
                 break;
             case R.id.glutesBtn:
                 if (gluteslock == false) {
-                    changeVisible(glutes, "Glutes");
+                    changeVisibleAndInsert(glutes, "Glutes");
                     break;
                 }
                 break;
             case R.id.lowerBackBtn:
                 if (lowerbacklock == false) {
-                    changeVisible(lowerback, "Lower Back");
+                    changeVisibleAndInsert(lowerback, "Lower Back");
                     break;
                 }
                 break;
             case R.id.traps3Btn:
                 if (traps3lock == false) {
-                    changeVisible(traps3, "Mid Traps");
+                    changeVisibleAndInsert(traps3, "Mid Traps");
                     break;
                 }
                 break;
             case R.id.hamstringBtn:
                 if (hamstringlock == false) {
-                    changeVisible(hamstring, "Hamstrings");
+                    changeVisibleAndInsert(hamstring, "Hamstrings");
                     break;
                 }
                 break;
@@ -223,6 +212,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        today = LocalDate.now();
+        todayString = today.format(DateTimeFormatter.ofPattern("MMM dd"));
+        weekdayString = today.format(DateTimeFormatter.ofPattern("EEEE"));
 
         groupA = findViewById(R.id.groupA);
         groupB = findViewById(R.id.groupB);
@@ -329,7 +322,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         shoulderRBtn = findViewById(R.id.shoulder2RBtn);
         shoulderRBtn.setOnClickListener(this);
 
-        traps2Btn =  findViewById(R.id.traps2Btn);
+        traps2Btn = findViewById(R.id.traps2Btn);
         traps2Btn.setOnClickListener(this);
         traps3Btn = findViewById(R.id.traps3Btn);
         traps3Btn.setOnClickListener(this);
@@ -356,66 +349,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if (view.getVisibility() == View.VISIBLE) {
             view.setVisibility(View.INVISIBLE);
-            DB.deletedata(name, month.format(date));
+            return;
+        }
+
+        view.setVisibility(View.VISIBLE);
+    }
+
+    public void changeVisibleAndInsert(View view, String name) {
+
+        if (view.getVisibility() == View.VISIBLE) {
+            view.setVisibility(View.INVISIBLE);
+            DB.deletedata(name, todayString);
             updatecard(null);
             return;
         }
 
         view.setVisibility(View.VISIBLE);
-        Boolean checkinsertdata = DB.insertdata(name, weekday.format(date), month.format(date));
-        if (checkinsertdata == true){
+        Boolean checkinsertdata = DB.insertdata(name, weekdayString, todayString);
+        Toast.makeText(this, "name is: " + name, Toast.LENGTH_SHORT).show();
+        if (checkinsertdata == true) {
             updatecard(name);
         }
     }
 
-    public void updatecard(String name){
-        if (name != null){
-            list.add(0, new workoutmodel(name, weekday.format(date), month.format(date)));
+    public void updatecard(String name) {
+        if (name != null) {
+            list.add(0, new workoutmodel(name, weekdayString, todayString));
             adapter.notifyDataSetChanged();
             return;
         }
         list.clear();
         Cursor result = DB.getdata();
-        while (result.moveToNext()){
+        while (result.moveToNext()) {
             list.add(0, new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
         }
         adapter.notifyDataSetChanged();
     }
 
-    public void loadcard(){
+    public void loadcard() {
         list.clear();
         Cursor result = DB.getdata();
-        while (result.moveToNext()){
+        while (result.moveToNext()) {
             list.add(0, new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
         }
     }
 
-    public void render(){
-        LocalDate today = LocalDate.now();
-        LocalDate yesterday = LocalDate.now().minusDays(1);
-        LocalDate yesyesterday = LocalDate.now().minusDays(2);
-        String day = today.format(DateTimeFormatter.ofPattern("MMM dd"));
-        String daybefore = yesterday.format(DateTimeFormatter.ofPattern("MMM dd"));
-        String daydaybefore = yesyesterday.format(DateTimeFormatter.ofPattern("MMM dd"));
-        Cursor result = DB.getNameFromDate(day, daybefore, daydaybefore);
+    public void render() {
+        //find all entry within 3 days and render them
+        String yesterday = today.minusDays(1).format(DateTimeFormatter.ofPattern("MMM dd"));
+        String beforeYesterday = today.minusDays(2).format(DateTimeFormatter.ofPattern("MMM dd"));
+        Cursor result = DB.getNameFromDate(todayString, yesterday, beforeYesterday);
 
-        while (result.moveToNext()){
-            switch (result.getString(0)){
+        while (result.moveToNext()) {
+            switch (result.getString(0)) {
                 case "Biceps":
                     changeVisible(bicep, "Biceps");
                     biceplock = true; //locks button if its already in data base
                     break;
                 case "Forearms":
                     changeVisible(forearm, "Forearms");
-                    forearmlock = true;
                     changeVisible(forearm2, "Forearms");
-                    forearm2lock = true;
+                    forearmlock = true;
                     break;
                 case "Shoulders":
                     changeVisible(shoulder, "Shoulders");
-                    shoulderlock = true;
                     changeVisible(shoulder2, "Shoulders");
-                    shoulder2lock = true;
+                    shoulderlock = true;
                     break;
                 case "Quads":
                     changeVisible(quad, "Quads");
@@ -423,15 +422,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
                 case "Calfs":
                     changeVisible(calf, "Calfs");
-                    calflock = true;
                     changeVisible(calf2, "Calfs");
-                    calf2lock = true;
+                    calflock = true;
                     break;
                 case "Upper Traps":
                     changeVisible(traps, "Upper Traps");
-                    trapslock = true;
                     changeVisible(traps2, "Upper Traps");
-                    traps2lock = true;
+                    trapslock = true;
                     break;
                 case "Chest":
                     changeVisible(chest, "Chest");
