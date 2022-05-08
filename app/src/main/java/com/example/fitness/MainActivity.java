@@ -12,11 +12,16 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+    //TODO: add stats
 
     private Button back;
     private Button front;
@@ -92,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private boolean traps3lock = false;
     private boolean lowerbacklock = false;
 
-    LocalDate today;
+    Date today;
     String todayString;
     String weekdayString;
 
@@ -206,16 +211,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    //TODO: add hold to delete function
+    //TODO: add hold to get more info on how to train
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        today = LocalDate.now();
-        todayString = today.format(DateTimeFormatter.ofPattern("MMM dd"));
-        weekdayString = today.format(DateTimeFormatter.ofPattern("EEEE"));
+        today = Calendar.getInstance().getTime();
+        SimpleDateFormat month = new SimpleDateFormat("MMM dd");
+        SimpleDateFormat weekday = new SimpleDateFormat("EEEE");
+        todayString = month.format(today);
+        weekdayString = weekday.format(today);
 
         groupA = findViewById(R.id.groupA);
         groupB = findViewById(R.id.groupB);
@@ -366,7 +373,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         view.setVisibility(View.VISIBLE);
         Boolean checkinsertdata = DB.insertdata(name, weekdayString, todayString);
-        Toast.makeText(this, "name is: " + name, Toast.LENGTH_SHORT).show();
         if (checkinsertdata == true) {
             updatecard(name);
         }
@@ -396,6 +402,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void render() {
         //find all entry within 3 days and render them
+        LocalDate today = LocalDate.now();
         String yesterday = today.minusDays(1).format(DateTimeFormatter.ofPattern("MMM dd"));
         String beforeYesterday = today.minusDays(2).format(DateTimeFormatter.ofPattern("MMM dd"));
         Cursor result = DB.getNameFromDate(todayString, yesterday, beforeYesterday);
