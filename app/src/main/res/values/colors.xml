@@ -12,6 +12,13 @@
     <color name="mainorange">#ff4f2c</color>
     <color name="lightorange">#fc6345</color>
     <color name="darkorange">#f04725</color>
+    <color name="orange1">#f56c51</color>
+    <color name="orange2">#ff5b3b</color>
+    <color name="orange3">#fa4f2d</color>
+    <color name="orange4">#eb3c1a</color>
+    <color name="orange5">#e03412</color>
+    <color name="orange6">#fc2a00</color>
+
 
 
 </resources>

@@ -1,6 +1,5 @@
 package com.example.fitness;
 
-import android.bluetooth.le.ScanSettings;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -8,34 +7,30 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
-import android.widget.Switch;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.mikephil.charting.animation.Easing;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.BarLineChartBase;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
+import com.github.mikephil.charting.formatter.DefaultValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.PercentFormatter;
-import com.github.mikephil.charting.utils.ColorTemplate;
+import com.github.mikephil.charting.formatter.ValueFormatter;
 
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class StatsFragment extends Fragment {
 
@@ -46,6 +41,7 @@ public class StatsFragment extends Fragment {
     ArrayList<workoutmodel> list; //list of muscle class has name, weekday, date
 
     private PieChart pieChart;
+    private BarChart barChart;
 
     Context context;
 
@@ -60,17 +56,25 @@ public class StatsFragment extends Fragment {
     //this method is like onCreate but for fragments
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        //get the existing database
-        DB = Database.getDatabase();
-
-        //initialise pieChart
-        pieChart = view.findViewById(R.id.statsPie);
 
         //initialise list
         list = new ArrayList<>();
 
+        //get the existing database
+        DB = Database.getDatabase();
+        //query the database add it to an array list
+        Cursor result = DB.getdata();
+        while (result.moveToNext()) {
+            list.add(0, new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
+        }
+
+        //initialise charts
+        pieChart = view.findViewById(R.id.statsPie);
+        barChart = view.findViewById(R.id.statsBar);
+
         setupPieChart();
         loadPieChartData();
+        loadBarChartData();
 
     }
 
@@ -79,7 +83,7 @@ public class StatsFragment extends Fragment {
         pieChart.setUsePercentValues(true);
         pieChart.setEntryLabelTextSize(18);
         pieChart.setEntryLabelColor(Color.BLACK);
-        pieChart.setCenterText("Training Frequency By Muscle Group");
+        pieChart.setCenterText("Training Frequency By Muscle Groups");
         pieChart.setCenterTextSize(20);
         pieChart.getDescription().setEnabled(false);
 
@@ -93,12 +97,6 @@ public class StatsFragment extends Fragment {
 
     private void loadPieChartData(){
         ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
-
-        Cursor result = DB.getdata();
-        while (result.moveToNext()) {
-            list.add(0, new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
-
-        }
 
         int total = list.size();
         float percent = (float) total / 100;
@@ -119,6 +117,7 @@ public class StatsFragment extends Fragment {
                 case "Triceps":
                     Arms += (1 * percent);
                     break;
+                case "Upper Traps":
                 case "Shoulders":
                     Shoulders += (1 * percent);
                     break;
@@ -134,7 +133,6 @@ public class StatsFragment extends Fragment {
                 case "Abs":
                     Abs += (1 * percent);
                     break;
-                case "Upper Traps":
                 case "Mid Traps":
                 case "Lats":
                 case "Lower Back":
@@ -153,12 +151,13 @@ public class StatsFragment extends Fragment {
 
         //load some colors for the categories
         ArrayList<Integer> colors = new ArrayList<>();
-        for (int color: ColorTemplate.MATERIAL_COLORS) {
-            colors.add(color);
-        }
-        for (int color: ColorTemplate.VORDIPLOM_COLORS) {
-            colors.add(color);
-        }
+        colors.add(Color.rgb(252, 124, 98));
+        colors.add(Color.rgb(245, 108, 81));
+        colors.add(Color.rgb(255, 91, 59));
+        colors.add(Color.rgb(250, 79, 45));
+        colors.add(Color.rgb(235, 60, 26));
+        colors.add(Color.rgb(224, 52, 18));
+        colors.add(Color.rgb(252, 42, 0));
 
         PieDataSet dataSet = new PieDataSet(entries, "Muscle Groups");
         dataSet.setColors(colors);
@@ -175,4 +174,94 @@ public class StatsFragment extends Fragment {
         //animation
         pieChart.animateY(1400, Easing.EaseInOutQuad);
     }
+
+    private void loadBarChartData(){
+        ArrayList<BarEntry> entries = new ArrayList<BarEntry>();
+
+        //Bar chart values
+        float Mon = 0;
+        float Tue = 0;
+        float Wed = 0;
+        float Thu = 0;
+        float Fri = 0;
+        float Sat = 0;
+        float Sun = 0;
+
+        //count how many entry for each weekday
+        for (workoutmodel entry: list){
+            switch (entry.getWeekday()){
+                case "Monday":
+                    Mon += 1;
+                    break;
+                case "Tuesday":
+                    Tue += 1;
+                    break;
+                case "Wednesday":
+                    Wed += 1;
+                    break;
+                case "Thursday":
+                    Thu += 1;
+                    break;
+                case "Friday":
+                    Fri += 1;
+                    break;
+                case "Saturday":
+                    Sat += 1;
+                    break;
+                case "Sunday":
+                    Sun += 1;;
+                    break;
+            }
+        }
+
+        //add the categories to the pie chart
+        entries.add(new BarEntry(0, Mon));
+        entries.add(new BarEntry(1, Tue));
+        entries.add(new BarEntry(2, Wed));
+        entries.add(new BarEntry(3, Thu));
+        entries.add(new BarEntry(4, Fri));
+        entries.add(new BarEntry(5, Sat));
+        entries.add(new BarEntry(6, Sun));
+
+        BarDataSet dataSet = new BarDataSet(entries, "Activity");
+        dataSet.setColor(Color.rgb(255, 79, 44));
+
+        BarData data = new BarData(dataSet);
+        data.setDrawValues(true);
+        data.setValueTextSize(20f);
+        data.setValueTextColor(Color.BLACK);
+        ValueFormatter valueFormats = new DefaultValueFormatter(0);
+        data.setValueFormatter(valueFormats);
+
+
+        //animation
+        barChart.animateY(2000);
+
+        ArrayList<String> xLabel = new ArrayList<>();
+        xLabel.add("MON");
+        xLabel.add("TUE");
+        xLabel.add("WED");
+        xLabel.add("THU");
+        xLabel.add("FRI");
+        xLabel.add("SAT");
+        xLabel.add("SUN");
+
+        String[] x = new String[]{"MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"};
+
+        XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        IndexAxisValueFormatter formatter = new IndexAxisValueFormatter();
+        formatter.setValues(x);
+        xAxis.setValueFormatter(formatter);
+
+        barChart.setDrawValueAboveBar(false);
+        barChart.getXAxis().setTextSize(11f);
+        barChart.getLegend().setEnabled(false);
+        barChart.getDescription().setEnabled(false);
+        barChart.setFitBars(true);
+        barChart.setData(data);
+        barChart.invalidate();
+    }
+
 }
