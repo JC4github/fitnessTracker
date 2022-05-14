@@ -30,7 +30,7 @@ import java.util.Date;
 
 public class HomeFragment extends Fragment implements View.OnClickListener {
 
-    //TODO: add stats
+    //TODO: add hold button for info
 
     Context thiscontext;
 
@@ -239,10 +239,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         todayString = month.format(today);
         weekdayString = weekday.format(today);
 
-        groupA = view.findViewById(R.id.groupA);
-        groupB = view.findViewById(R.id.groupB);
+        //gets database from Database class
+        DB = Database.getInstance(thiscontext);
 
-        DB = new DBHelper(thiscontext);
+        //these are the buttons used to change front and back view
+        groupA = view.findViewById(R.id.groupA); //front view group of buttons and imageViews
+        groupB = view.findViewById(R.id.groupB); //back view group
 
         back = view.findViewById(R.id.backBtn);
         back.setOnClickListener(new View.OnClickListener() {
@@ -261,6 +263,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 groupA.setVisibility(groupA.VISIBLE);
             }
         });
+
 
         workoutRecView = view.findViewById(R.id.workoutRecView);
 
