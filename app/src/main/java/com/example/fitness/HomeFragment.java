@@ -1,11 +1,16 @@
 package com.example.fitness;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
+import android.icu.text.IDNA;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -28,7 +33,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-public class HomeFragment extends Fragment implements View.OnClickListener {
+public class HomeFragment extends Fragment implements View.OnClickListener, View.OnLongClickListener {
 
     //TODO: add hold button for info
 
@@ -114,6 +119,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     workoutRecViewAdapter adapter;
 
+    //used for web view
+    Intent i;
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
@@ -156,8 +164,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             case R.id.calf2BtnL:
             case R.id.calf2BtnR:
                 if (calflock == false) {
-                    changeVisibleAndInsert(calf, "Calfs");
-                    changeVisible(calf2, "Calfs");
+                    changeVisibleAndInsert(calf, "Calves");
+                    changeVisible(calf2, "Calves");
                     break;
                 }
                 break;
@@ -222,7 +230,82 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    //TODO: add hold to get more info on how to train
+    @Override
+    public boolean onLongClick(View view) {
+        switch (view.getId()) {
+            case R.id.bicepBtnL:
+            case R.id.bicepBtnR:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Biceps");
+                startActivity(i);
+                return true;
+            case R.id.forearmBtnL:
+            case R.id.forearmBtnR:
+            case R.id.forearm2LBtn:
+            case R.id.forearm2RBtn:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Forearms");
+                startActivity(i);
+                return true;
+            case R.id.shoulderBtnL:
+            case R.id.shoulderBtnR:
+            case R.id.shoulder2LBtn:
+            case R.id.shoulder2RBtn:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Shoulders");
+                startActivity(i);
+                return true;
+            case R.id.quadBtnL:
+            case R.id.quadBtnR:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Quads");
+                startActivity(i);
+                return true;
+            case R.id.calf1BtnL:
+            case R.id.calf1BtnR:
+            case R.id.calf2BtnL:
+            case R.id.calf2BtnR:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Calves");
+                startActivity(i);
+                return true;
+            case R.id.trapsBtn:
+            case R.id.traps2Btn:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Traps");
+                startActivity(i);
+                return true;
+            case R.id.chestBtn:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Chest");
+                startActivity(i);
+                return true;
+            case R.id.absBtn:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Abdominals");
+                startActivity(i);
+                return true;
+            case R.id.tricepLBtn:
+            case R.id.tricepRBtn:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Triceps");
+                startActivity(i);
+                return true;
+            case R.id.latsLBtn:
+            case R.id.latsRBtn:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Lats");
+                startActivity(i);
+                return true;
+            case R.id.glutesBtn:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Glutes");
+                startActivity(i);
+                return true;
+            case R.id.lowerBackBtn:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Lowerback");
+                startActivity(i);
+                return true;
+            case R.id.traps3Btn:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Traps_middle");
+                startActivity(i);
+                return true;
+            case R.id.hamstringBtn:
+                i.putExtra(WebViewActivity.WEBSITE_ADDRESS, "https://musclewiki.com/Exercises/Male/Hamstrings");
+                startActivity(i);
+                return true;
+        }
+        return true;
+    }
 
     @Nullable
     @Override
@@ -238,6 +321,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         SimpleDateFormat weekday = new SimpleDateFormat("EEEE");
         todayString = month.format(today);
         weekdayString = weekday.format(today);
+
+        //initialise intent for web view
+        i = new Intent(thiscontext, WebViewActivity.class);
 
         //gets database from Database class
         DB = Database.getInstance(thiscontext);
@@ -300,72 +386,104 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         //initialise all buttons
         bicepBtnL = view.findViewById(R.id.bicepBtnL);
         bicepBtnL.setOnClickListener(this);
+        bicepBtnL.setOnLongClickListener(this);
         bicepBtnR = view.findViewById(R.id.bicepBtnR);
         bicepBtnR.setOnClickListener(this);
+        bicepBtnR.setOnLongClickListener(this);
 
         shoulderBtnL = view.findViewById(R.id.shoulderBtnL);
         shoulderBtnL.setOnClickListener(this);
+        shoulderBtnL.setOnLongClickListener(this);
         shoulderBtnR = view.findViewById(R.id.shoulderBtnR);
         shoulderBtnR.setOnClickListener(this);
+        shoulderBtnR.setOnLongClickListener(this);
 
         chestBtn = view.findViewById(R.id.chestBtn);
         chestBtn.setOnClickListener(this);
+        chestBtn.setOnLongClickListener(this);
 
         absBtn = view.findViewById(R.id.absBtn);
         absBtn.setOnClickListener(this);
+        absBtn.setOnLongClickListener(this);
 
         quadBtnL = view.findViewById(R.id.quadBtnL);
         quadBtnL.setOnClickListener(this);
+        quadBtnL.setOnLongClickListener(this);
         quadBtnR = view.findViewById(R.id.quadBtnR);
         quadBtnR.setOnClickListener(this);
+        quadBtnR.setOnLongClickListener(this);
 
         forearmBtnL = view.findViewById(R.id.forearmBtnL);
         forearmBtnL.setOnClickListener(this);
+        forearmBtnL.setOnLongClickListener(this);
         forearmBtnR = view.findViewById(R.id.forearmBtnR);
         forearmBtnR.setOnClickListener(this);
+        forearmBtnR.setOnLongClickListener(this);
 
         calfBtnL = view.findViewById(R.id.calf1BtnL);
         calfBtnL.setOnClickListener(this);
+        calfBtnL.setOnLongClickListener(this);
         calfBtnR = view.findViewById(R.id.calf1BtnR);
         calfBtnR.setOnClickListener(this);
+        calfBtnR.setOnLongClickListener(this);
 
         trapsBtn = view.findViewById(R.id.trapsBtn);
         trapsBtn.setOnClickListener(this);
+        trapsBtn.setOnLongClickListener(this);
 
         tricepLBtn = view.findViewById(R.id.tricepLBtn);
         tricepLBtn.setOnClickListener(this);
+        tricepLBtn.setOnLongClickListener(this);
         tricepRBtn = view.findViewById(R.id.tricepRBtn);
         tricepRBtn.setOnClickListener(this);
+        tricepRBtn.setOnLongClickListener(this);
 
         forearmLBtn = view.findViewById(R.id.forearm2LBtn);
         forearmLBtn.setOnClickListener(this);
+        forearmLBtn.setOnLongClickListener(this);
         forearmRBtn = view.findViewById(R.id.forearm2RBtn);
         forearmRBtn.setOnClickListener(this);
+        forearmRBtn.setOnLongClickListener(this);
 
         shoulderLBtn = view.findViewById(R.id.shoulder2LBtn);
         shoulderLBtn.setOnClickListener(this);
+        shoulderLBtn.setOnLongClickListener(this);
         shoulderRBtn = view.findViewById(R.id.shoulder2RBtn);
         shoulderRBtn.setOnClickListener(this);
+        shoulderRBtn.setOnLongClickListener(this);
 
         traps2Btn = view.findViewById(R.id.traps2Btn);
         traps2Btn.setOnClickListener(this);
+        traps2Btn.setOnLongClickListener(this);
         traps3Btn = view.findViewById(R.id.traps3Btn);
         traps3Btn.setOnClickListener(this);
+        traps3Btn.setOnLongClickListener(this);
 
         glutesBtn = view.findViewById(R.id.glutesBtn);
         glutesBtn.setOnClickListener(this);
+        glutesBtn.setOnLongClickListener(this);
+
         hamstringBtn = view.findViewById(R.id.hamstringBtn);
         hamstringBtn.setOnClickListener(this);
+        hamstringBtn.setOnLongClickListener(this);
+
         calf2LBtn = view.findViewById(R.id.calf2BtnL);
         calf2LBtn.setOnClickListener(this);
+        calf2LBtn.setOnLongClickListener(this);
         calf2RBtn = view.findViewById(R.id.calf2BtnR);
         calf2RBtn.setOnClickListener(this);
+        calf2RBtn.setOnLongClickListener(this);
+
         lowerBackBtn = view.findViewById(R.id.lowerBackBtn);
         lowerBackBtn.setOnClickListener(this);
+        lowerBackBtn.setOnLongClickListener(this);
+
         latsLBtn = view.findViewById(R.id.latsLBtn);
         latsLBtn.setOnClickListener(this);
+        latsLBtn.setOnLongClickListener(this);
         latsRBtn = view.findViewById(R.id.latsRBtn);
         latsRBtn.setOnClickListener(this);
+        latsRBtn.setOnLongClickListener(this);
 
         render();
     }
@@ -491,4 +609,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
     }
+
+
 }
