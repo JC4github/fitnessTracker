@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment;
 
 public class SettingsFragment extends Fragment {
 
-    //TODO: add stats
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -83,7 +83,7 @@ public class StatsFragment extends Fragment {
         pieChart.setUsePercentValues(true);
         pieChart.setEntryLabelTextSize(18);
         pieChart.setEntryLabelColor(Color.BLACK);
-        pieChart.setCenterText("Training Frequency By Muscle Groups");
+        pieChart.setCenterText("Muscle Groups");
         pieChart.setCenterTextSize(20);
         pieChart.getDescription().setEnabled(false);
 
