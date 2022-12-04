@@ -14,7 +14,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase DB) {
-        DB.execSQL("create Table if not exists Workout (id integer primary key autoincrement, muscle TEXT, weekday TEXT, date TEXT)");
+        DB.execSQL("create Table if not exists Workout (id integer primary key autoincrement, muscle TEXT, weekday TEXT, date TEXT, year TEXT)");
     }
 
     @Override
@@ -22,12 +22,13 @@ public class DBHelper extends SQLiteOpenHelper {
         DB.execSQL("drop Table if exists Workout");
     }
 
-    public Boolean insertdata(String muscle, String weekday, String date){
+    public Boolean insertdata(String muscle, String weekday, String date, String year){
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("muscle", muscle);
         contentValues.put("weekday", weekday);
         contentValues.put("date", date);
+        contentValues.put("year", year);
         long result = DB.insert("Workout", null, contentValues);
         return result != -1;
     }
@@ -47,9 +48,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return DB.rawQuery("Select muscle, weekday, date from Workout", null);
     }
 
-    public Cursor getNameFromDate(String today, String yesterday, String beforeYesterday){
+    public Cursor getNameFromDate(String today, String yesterday, String beforeYesterday, String year){
         SQLiteDatabase DB = this.getWritableDatabase();
 //        Cursor cursor = DB.rawQuery("Select muscle from Workout where date = ? or date = ? or date= ?", new String[]{today, yesterday, beforeYesterday});
-        return DB.rawQuery("Select muscle from Workout where date = ? or date = ? or date= ?", new String[]{today, yesterday, beforeYesterday});
+        return DB.rawQuery("Select muscle from Workout where date = ? or date = ? or date= ? and year= ?", new String[]{today, yesterday, beforeYesterday, year});
     }
 }

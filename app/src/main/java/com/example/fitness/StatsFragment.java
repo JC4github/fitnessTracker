@@ -105,8 +105,7 @@ public class StatsFragment extends Fragment {
         float Arms = 0;
         float Shoulders = 0;
         float Legs = 0;
-        float Chest = 0;
-        float Abs = 0;
+        float ChestAndAbs = 0;
         float Back = 0;
 
         //count each group as percentages of the pie
@@ -121,17 +120,15 @@ public class StatsFragment extends Fragment {
                 case "Shoulders":
                     Shoulders += (1 * percent);
                     break;
-                case "Calfs":
+                case "Calves":
                 case "Quads":
                 case "Hamstrings":
                 case "Glutes":
                     Legs += (1 * percent);
                     break;
                 case "Chest":
-                    Chest += (1 * percent);
-                    break;
                 case "Abs":
-                    Abs += (1 * percent);
+                    ChestAndAbs += (1 * percent);
                     break;
                 case "Mid Traps":
                 case "Lats":
@@ -145,8 +142,7 @@ public class StatsFragment extends Fragment {
         entries.add(new PieEntry(Arms, "Arms"));
         entries.add(new PieEntry(Shoulders, "Shoulders"));
         entries.add(new PieEntry(Legs, "Legs"));
-        entries.add(new PieEntry(Chest, "Chest"));
-        entries.add(new PieEntry(Abs, "Abs"));
+        entries.add(new PieEntry(ChestAndAbs, "Chest&Abs"));
         entries.add(new PieEntry(Back, "Back"));
 
         //load some colors for the categories

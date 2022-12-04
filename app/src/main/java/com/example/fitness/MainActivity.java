@@ -91,6 +91,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                notesObj.setArguments(bundle);
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new NotesFragment()).commit();
                 break;
+            case R.id.nav_history:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new HistoryFragment()).commit();
+                break;
         }
 
         drawer.closeDrawer(GravityCompat.START);

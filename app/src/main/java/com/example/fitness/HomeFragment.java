@@ -116,6 +116,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
     Date today;
     String todayString;
     String weekdayString;
+    String yearString;
 
     workoutRecViewAdapter adapter;
 
@@ -319,8 +320,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
         today = Calendar.getInstance().getTime();
         SimpleDateFormat month = new SimpleDateFormat("MMM dd");
         SimpleDateFormat weekday = new SimpleDateFormat("EEEE");
+        SimpleDateFormat year = new SimpleDateFormat("yyyy");
+
         todayString = month.format(today);
         weekdayString = weekday.format(today);
+        yearString = year.format(today);
 
         //initialise intent for web view
         i = new Intent(thiscontext, WebViewActivity.class);
@@ -508,7 +512,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
         }
 
         view.setVisibility(View.VISIBLE);
-        Boolean checkinsertdata = DB.insertdata(name, weekdayString, todayString);
+        Boolean checkinsertdata = DB.insertdata(name, weekdayString, todayString, yearString);
         if (checkinsertdata == true) {
             updatecard(name);
         }
@@ -541,7 +545,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
         LocalDate today = LocalDate.now();
         String yesterday = today.minusDays(1).format(DateTimeFormatter.ofPattern("MMM dd"));
         String beforeYesterday = today.minusDays(2).format(DateTimeFormatter.ofPattern("MMM dd"));
-        Cursor result = DB.getNameFromDate(todayString, yesterday, beforeYesterday);
+        Cursor result = DB.getNameFromDate(todayString, yesterday, beforeYesterday, yearString);
 
         while (result.moveToNext()) {
             switch (result.getString(0)) {
@@ -563,9 +567,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
                     changeVisible(quad, "Quads");
                     quadlock = true;
                     break;
-                case "Calfs":
-                    changeVisible(calf, "Calfs");
-                    changeVisible(calf2, "Calfs");
+                case "Calves":
+                    changeVisible(calf, "Calves");
+                    changeVisible(calf2, "Calves");
                     calflock = true;
                     break;
                 case "Upper Traps":

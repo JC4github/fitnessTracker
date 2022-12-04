@@ -619,36 +619,36 @@
                 android:rotation="106" />
         </RelativeLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/workoutRecView"
-            android:layout_width="match_parent"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/workoutRecView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spacer"
+        android:background="@color/offWhite"
+        android:paddingLeft="10dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/spacer"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_below="@+id/groupB"
+        android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@color/mainorange"
+        app:cardCornerRadius="5dp"
+        app:cardElevation="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/spacer"
-            android:background="@color/offWhite"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"/>
+            android:layout_marginLeft="43dp"
+            android:layout_marginTop="3dp"
+            android:text="History"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/spacer"
-            android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_below="@+id/groupB"
-            android:layout_marginTop="10dp"
-            app:cardBackgroundColor="@color/mainorange"
-            app:cardCornerRadius="5dp"
-            app:cardElevation="5dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="43dp"
-                android:layout_marginTop="3dp"
-                android:text="History"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                android:textStyle="bold"/>
-
-        </androidx.cardview.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>
