@@ -28,18 +28,65 @@
     </androidx.cardview.widget.CardView>
 
     <LinearLayout
+        android:id="@+id/textFields"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/spacer"
+        android:background="@color/offWhite"
+        android:paddingLeft="23dp">
+
         <EditText
+            android:id="@+id/muscleField"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            ></EditText>
+            android:ems="5"
+            android:hint="Muscle"
+            android:inputType="textCapWords"></EditText>
+
+        <EditText
+            android:id="@+id/weekdayField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:hint="Weekday"
+            android:inputType="textCapWords"></EditText>
+
+        <EditText
+            android:id="@+id/monthField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="2"
+            android:hint="Dec"
+            android:inputType="textCapWords" />
+
+        <EditText
+            android:id="@+id/dateField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="2"
+            android:hint="07"
+            android:inputType="text"></EditText>
+
+
     </LinearLayout>
-    <EditText
-        android:layout_below="@+id/spacer"
-        android:id="@+id/editTextDate"
+
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date" />
+        android:layout_below="@+id/textFields"
+        android:id="@+id/exampleText"
+        android:layout_marginStart="25dp"
+        android:text="Example: Chest Saturday Nov 12"></TextView>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exampleText"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="10dp"
+        android:text="Enter"
+        android:id="@+id/addDataBtn"></Button>
+
+
+
 </RelativeLayout>
