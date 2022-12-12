@@ -28,7 +28,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="History"
+                    android:text="Chest"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
@@ -39,7 +39,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:gravity="end"
-
+                    android:id="@+id/chestdate"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -65,7 +65,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="History"
+                    android:text="Back"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
@@ -76,7 +76,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="end"
                     android:layout_marginRight="10dp"
-
+                    android:id="@+id/backdate"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -114,7 +114,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="History"
+                    android:text="Biceps"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
@@ -123,9 +123,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_marginRight="10dp"
-
+                    android:gravity="end"
+                    android:id="@+id/bicepdate"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -151,7 +151,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="History"
+                    android:text="Triceps"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
@@ -160,9 +160,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_marginRight="10dp"
-
+                    android:gravity="end"
+                    android:id="@+id/tricepdate"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -200,7 +200,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="History"
+                    android:text="Forearms"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
@@ -209,9 +209,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_marginRight="10dp"
-
+                    android:gravity="end"
+                    android:id="@+id/forearmdate"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -237,7 +237,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="History"
+                    android:text="Shoulders"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:layout_marginLeft="10dp"
@@ -246,9 +246,9 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_marginRight="10dp"
-
+                    android:gravity="end"
+                    android:id="@+id/shoulderdate"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -260,14 +260,14 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/row4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/row3"
-        android:id="@+id/row4"
-        android:gravity="center"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginBottom="10dp">
+        android:layout_marginBottom="10dp"
+        android:gravity="center">
 
         <androidx.cardview.widget.CardView
 
@@ -286,24 +286,23 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="History"
+                    android:layout_marginLeft="10dp"
+                    android:text="Core"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:layout_marginLeft="10dp"
                     android:textStyle="normal" />
 
                 <TextView
+                    android:id="@+id/coredate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_marginRight="10dp"
-
+                    android:gravity="end"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
                     android:textStyle="normal" />
             </RelativeLayout>
-
 
 
         </androidx.cardview.widget.CardView>
@@ -323,18 +322,18 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="History"
+                    android:layout_marginLeft="10dp"
+                    android:text="Legs"
                     android:textColor="@color/white"
                     android:textSize="20dp"
-                    android:layout_marginLeft="10dp"
                     android:textStyle="normal" />
 
                 <TextView
+                    android:id="@+id/legdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_marginRight="10dp"
-
+                    android:gravity="end"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -352,15 +351,15 @@
         android:layout_below="@+id/row4"
         android:layout_marginTop="10dp"
         app:cardBackgroundColor="@color/mainorange"
-        app:cardCornerRadius="5dp"
+        app:cardCornerRadius="0dp"
         app:cardElevation="5dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="43dp"
+            android:layout_marginLeft="25dp"
             android:layout_marginTop="3dp"
-            android:text="History"
+            android:text="Recent Activity"
             android:textColor="@color/white"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -371,7 +370,7 @@
         android:id="@+id/workoutRecView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/row4"
+        android:layout_below="@+id/spacer"
         android:background="@color/offWhite"
         android:paddingLeft="10dp"
         android:paddingTop="10dp"

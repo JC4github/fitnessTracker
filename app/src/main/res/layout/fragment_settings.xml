@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/spacer"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+
+        android:layout_marginTop="10dp"
+        app:cardBackgroundColor="@color/mainorange"
+        app:cardCornerRadius="0dp"
+        app:cardElevation="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="3dp"
+            android:text="Manually Add Data"
+            android:textColor="@color/white"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            ></EditText>
+    </LinearLayout>
+    <EditText
+        android:layout_below="@+id/spacer"
+        android:id="@+id/editTextDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="this is the settings page"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="30sp"/>
-
+        android:ems="10"
+        android:inputType="date" />
 </RelativeLayout>
