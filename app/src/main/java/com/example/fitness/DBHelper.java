@@ -56,7 +56,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor findLast(String muscle){
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select date from Workout where muscle = ? limit 1", new String[]{muscle});
+        Cursor cursor = DB.rawQuery("Select date from Workout where muscle = ? order by id DESC limit 1", new String[]{muscle});
         return cursor;
     }
 }

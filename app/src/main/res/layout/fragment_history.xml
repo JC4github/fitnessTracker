@@ -9,12 +9,14 @@
         android:layout_height="wrap_content"
         android:id="@+id/row1"
         android:gravity="center"
-        android:layout_margin="10dp">
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        >
 
         <androidx.cardview.widget.CardView
 
-            android:layout_width="185dp"
-            android:layout_height="40dp"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
             android:layout_marginRight="10dp"
             app:cardBackgroundColor="@color/mainorange"
             app:cardCornerRadius="5dp"
@@ -35,11 +37,11 @@
                     android:textStyle="normal" />
 
                 <TextView
+                    android:id="@+id/chestdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:gravity="end"
-                    android:id="@+id/chestdate"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -51,8 +53,8 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="185dp"
-            android:layout_height="40dp"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
             app:cardBackgroundColor="@color/mainorange"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
@@ -99,8 +101,8 @@
 
         <androidx.cardview.widget.CardView
 
-            android:layout_width="185dp"
-            android:layout_height="40dp"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
             android:layout_marginRight="10dp"
             app:cardBackgroundColor="@color/mainorange"
             app:cardCornerRadius="5dp"
@@ -137,8 +139,8 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="185dp"
-            android:layout_height="40dp"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
             app:cardBackgroundColor="@color/mainorange"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
@@ -185,8 +187,8 @@
 
         <androidx.cardview.widget.CardView
 
-            android:layout_width="185dp"
-            android:layout_height="40dp"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
             android:layout_marginRight="10dp"
             app:cardBackgroundColor="@color/mainorange"
             app:cardCornerRadius="5dp"
@@ -223,8 +225,8 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="185dp"
-            android:layout_height="40dp"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
             app:cardBackgroundColor="@color/mainorange"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
@@ -271,8 +273,8 @@
 
         <androidx.cardview.widget.CardView
 
-            android:layout_width="185dp"
-            android:layout_height="40dp"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
             android:layout_marginRight="10dp"
             app:cardBackgroundColor="@color/mainorange"
             app:cardCornerRadius="5dp"
@@ -308,8 +310,8 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
-            android:layout_width="185dp"
-            android:layout_height="40dp"
+            android:layout_width="220dp"
+            android:layout_height="50dp"
             app:cardBackgroundColor="@color/mainorange"
             app:cardCornerRadius="5dp"
             app:cardElevation="5dp">
@@ -372,8 +374,8 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/spacer"
         android:background="@color/offWhite"
-        android:paddingLeft="10dp"
+        android:paddingLeft="20dp"
         android:paddingTop="10dp"
-        android:paddingRight="10dp" />
+        android:paddingRight="20dp" />
 
 </RelativeLayout>

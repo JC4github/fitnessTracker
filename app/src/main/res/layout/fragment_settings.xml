@@ -41,6 +41,7 @@
             android:layout_height="wrap_content"
             android:ems="5"
             android:hint="Muscle"
+            android:text=""
             android:inputType="textCapWords"></EditText>
 
         <EditText
@@ -48,6 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="5"
+            android:text=""
             android:hint="Weekday"
             android:inputType="textCapWords"></EditText>
 
@@ -56,6 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="2"
+            android:text=""
             android:hint="Dec"
             android:inputType="textCapWords" />
 
@@ -65,27 +68,37 @@
             android:layout_height="wrap_content"
             android:ems="2"
             android:hint="07"
+            android:text=""
+            android:inputType="text"></EditText>
+
+        <EditText
+            android:id="@+id/yearField"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="3"
+            android:text=""
+            android:hint="2020"
             android:inputType="text"></EditText>
 
 
     </LinearLayout>
 
     <TextView
+        android:id="@+id/exampleText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/textFields"
-        android:id="@+id/exampleText"
         android:layout_marginStart="25dp"
-        android:text="Example: Chest Saturday Nov 12"></TextView>
+        android:text="Example: Chest Saturday Nov 12 2022"></TextView>
 
     <Button
+        android:id="@+id/addDataBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/exampleText"
         android:layout_marginStart="25dp"
         android:layout_marginTop="10dp"
-        android:text="Enter"
-        android:id="@+id/addDataBtn"></Button>
+        android:text="Enter"></Button>
 
 
 
