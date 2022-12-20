@@ -74,11 +74,11 @@
                     android:textStyle="normal" />
 
                 <TextView
+                    android:id="@+id/backdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="end"
                     android:layout_marginRight="10dp"
-                    android:id="@+id/backdate"
+                    android:gravity="end"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -123,11 +123,11 @@
                     android:textStyle="normal" />
 
                 <TextView
+                    android:id="@+id/bicepdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:gravity="end"
-                    android:id="@+id/bicepdate"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -160,11 +160,11 @@
                     android:textStyle="normal" />
 
                 <TextView
+                    android:id="@+id/tricepdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:gravity="end"
-                    android:id="@+id/tricepdate"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -209,11 +209,11 @@
                     android:textStyle="normal" />
 
                 <TextView
+                    android:id="@+id/forearmdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:gravity="end"
-                    android:id="@+id/forearmdate"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"
@@ -246,11 +246,11 @@
                     android:textStyle="normal" />
 
                 <TextView
+                    android:id="@+id/shoulderdate"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="10dp"
                     android:gravity="end"
-                    android:id="@+id/shoulderdate"
                     android:text="1d"
                     android:textColor="@color/white"
                     android:textSize="20dp"

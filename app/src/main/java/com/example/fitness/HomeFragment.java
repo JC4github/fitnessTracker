@@ -14,6 +14,7 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -42,8 +43,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
     private Button back;
     private Button front;
     private DBHelper DB;
-    private RecyclerView workoutRecView;
-    ArrayList<workoutmodel> list;
 
     private RelativeLayout groupA;
     private RelativeLayout groupB;
@@ -118,10 +117,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
     String weekdayString;
     String yearString;
 
-    workoutRecViewAdapter adapter;
-
     //used for web view
     Intent i;
+
+    //Activity elements
+    private TextView muscleActivity;
+    private TextView dateActivity;
 
     @Override
     public void onClick(View view) {
@@ -312,7 +313,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         thiscontext = container.getContext();
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        //initialise activities elements
+        muscleActivity = (TextView) view.findViewById(R.id.muscleActivity);
+        dateActivity = (TextView) view.findViewById(R.id.dateActivity);
+
+        return view;
     }
 
     @Override
@@ -353,18 +360,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
                 groupA.setVisibility(groupA.VISIBLE);
             }
         });
-
-
-        workoutRecView = view.findViewById(R.id.workoutRecView);
-
-        list = new ArrayList<>();
-        loadcard();
-
-        adapter = new workoutRecViewAdapter();
-        adapter.setList(list);
-
-        workoutRecView.setAdapter(adapter);
-        workoutRecView.setLayoutManager(new LinearLayoutManager(thiscontext));
 
 
         //initialise all images
@@ -490,6 +485,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
         latsRBtn.setOnLongClickListener(this);
 
         render();
+        updateActivity();
     }
 
     public void changeVisible(View view, String name) {
@@ -504,39 +500,32 @@ public class HomeFragment extends Fragment implements View.OnClickListener, View
 
     public void changeVisibleAndInsert(View view, String name) {
 
+        //click on the muscle again to deselect it
         if (view.getVisibility() == View.VISIBLE) {
             view.setVisibility(View.INVISIBLE);
-            DB.deletedata(name, todayString);
-            updatecard(null);
+            DB.deletedata(name, todayString, yearString);
+            updateActivity();
             return;
         }
+
 
         view.setVisibility(View.VISIBLE);
-        Boolean checkinsertdata = DB.insertdata(name, weekdayString, todayString, yearString);
-        if (checkinsertdata == true) {
-            updatecard(name);
-        }
+        DB.insertdata(name, weekdayString, todayString, yearString);
+        updateActivity();
     }
 
-    public void updatecard(String name) {
-        if (name != null) {
-            list.add(0, new workoutmodel(name, weekdayString, todayString));
-            adapter.notifyDataSetChanged();
-            return;
-        }
-        list.clear();
-        Cursor result = DB.getdata();
-        while (result.moveToNext()) {
-            list.add(0, new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
-        }
-        adapter.notifyDataSetChanged();
-    }
+    public void updateActivity(){
+        Cursor result = DB.findLatestEntry();
+        while (result.moveToNext()){
+            String muscle = result.getString(0);
+            String date = result.getString(1);
+            String year = result.getString(2);
 
-    public void loadcard() {
-        list.clear();
-        Cursor result = DB.getdata();
-        while (result.moveToNext()) {
-            list.add(0, new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
+            DateDiff df = new DateDiff();
+            long difference = df.DateDiff(date, year);
+
+            muscleActivity.setText(muscle);
+            dateActivity.setText(String.valueOf(difference));
         }
     }
 

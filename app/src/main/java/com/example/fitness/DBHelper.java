@@ -33,11 +33,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public void deletedata(String muscle, String date){
+    public void deletedata(String muscle, String date, String year){
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select * from Workout where muscle = ? and date = ?", new String[]{muscle, date});
+        Cursor cursor = DB.rawQuery("Select * from Workout where muscle = ? and date = ? and year = ?", new String[]{muscle, date, year});
         if (cursor.getCount() > 0) {
-            DB.delete("Workout", "muscle=? and date=?", new String[]{muscle, date});
+            DB.delete("Workout", "muscle=? and date=? and year=?", new String[]{muscle, date, year});
         }
         cursor.close();
     }
@@ -56,7 +56,13 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public Cursor findLast(String muscle){
         SQLiteDatabase DB = this.getWritableDatabase();
-        Cursor cursor = DB.rawQuery("Select date from Workout where muscle = ? order by id DESC limit 1", new String[]{muscle});
+        Cursor cursor = DB.rawQuery("Select date, year from Workout where muscle = ? order by id DESC limit 1", new String[]{muscle});
+        return cursor;
+    }
+
+    public Cursor findLatestEntry(){
+        SQLiteDatabase DB = this.getWritableDatabase();
+        Cursor cursor = DB.rawQuery("Select muscle, date, year from Workout order by id DESC limit 1", null);
         return cursor;
     }
 }
