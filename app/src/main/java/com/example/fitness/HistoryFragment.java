@@ -165,8 +165,11 @@ public class HistoryFragment extends Fragment {
     public void loadcard() {
         list.clear();
         Cursor result = DB.getdata();
+        int count = 0;
+
         while (result.moveToNext()) {
-            list.add(0, new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
+            list.add(count, new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
+            count++;
         }
     }
 }

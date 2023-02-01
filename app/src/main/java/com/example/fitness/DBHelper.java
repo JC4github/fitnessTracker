@@ -45,7 +45,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public Cursor getdata(){
         SQLiteDatabase DB = this.getWritableDatabase();
 //        Cursor cursor = DB.rawQuery("Select * from Workout", null);
-        return DB.rawQuery("Select muscle, weekday, date from Workout limit 30", null);
+        return DB.rawQuery("Select muscle, weekday, date from Workout order by id DESC limit 30", null);
     }
 
     public Cursor getNameFromDate(String today, String yesterday, String beforeYesterday, String year){
