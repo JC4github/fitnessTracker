@@ -63,7 +63,7 @@ public class StatsFragment extends Fragment {
         //get the existing database
         DB = Database.getDatabase();
         //query the database add it to an array list
-        Cursor result = DB.getdata();
+        Cursor result = DB.getDataAll();
         while (result.moveToNext()) {
             list.add(0, new workoutmodel(result.getString(0), result.getString(1), result.getString(2)));
         }

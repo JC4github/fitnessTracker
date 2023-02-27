@@ -48,6 +48,12 @@ public class DBHelper extends SQLiteOpenHelper {
         return DB.rawQuery("Select muscle, weekday, date from Workout order by id DESC limit 30", null);
     }
 
+    public Cursor getDataAll(){
+        SQLiteDatabase DB = this.getWritableDatabase();
+//        Cursor cursor = DB.rawQuery("Select * from Workout", null);
+        return DB.rawQuery("Select muscle, weekday, date from Workout", null);
+    }
+
     public Cursor getNameFromDate(String today, String yesterday, String beforeYesterday, String year){
         SQLiteDatabase DB = this.getWritableDatabase();
 //        Cursor cursor = DB.rawQuery("Select muscle from Workout where date = ? or date = ? or date= ?", new String[]{today, yesterday, beforeYesterday});
